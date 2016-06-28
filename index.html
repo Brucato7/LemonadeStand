@@ -8,11 +8,20 @@
 
 
 <div id="main">
-
-	
-<!-- PAGE CONTENT HERE -->
-
-
+  <div id="lemonadeForm">
+    <form name="lemonadeSimulation">
+        <formfield>
+          How many days should the simulation run:  
+          <input type="number" max="10" min="1" name="numberOfDays"><br>
+          How many people pass by your stand per day: 
+          <input type="number" min="0" step="10" name="averageNumOfPasserbys"><br>
+          What is the cost to make each lemonade: 
+          <input type="number"  min="0" max="20" step=".5" name="costToMake"><br>
+          What is the price per lemonade: 
+          <input type="number" min="1" max="20" step=".5" name="Price">
+        </formfield>
+    </form>
+  </div>
 </div>
 
 
