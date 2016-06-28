@@ -15,11 +15,19 @@ function LemonadeStand(){
 	this.cost = 0;
 	this.passerbysPerDay = 0;
 	this.days = 0;
-	this.generatePeople = function(num) {
-		for(var i = 0; i < num; i++){
-			var object = new Person();
-			this.pushToArray(object.probabilityOfPurchase, this.passerbys);
+	this.generatePeople = function(num, days) {
+		for(var j = 0; j < days; j++){
+			for(var i = 0; i < num; i++){
+				var object = new Person();
+				var probability = this.calculateProbabilityOfPurchase(object.probabilityOfPurchase, this.forecast[j]);
+				this.pushToArray(probability, this.passerbys);
+			}
 		}
+	}
+	this.calculateProbabilityOfPurchase = function(prob, forecast){
+		var probability = prob/this.price;
+		probability = (forecast>75 ? probability*(forecast%75): probability*1);
+		return probability;
 	}
 	this.pushToArray = function(object, array){
 		array.push(object);
@@ -33,6 +41,12 @@ function LemonadeStand(){
 		for(var i = 0; i < days; i++){
 			this.pushToArray(document.weather.forecast[i].high, this.forecast);
 		}
+	}
+	this.getValuesFromInput = function(){
+		this.setPrice(document.getElementById('price').value);
+		this.setCost(document.getElementById('cost').value);
+		this.setDays(document.getElementById('numberOfDays').value);
+		this.setPasserbysPerDay(document.getElementById('passerbysPerDay').value);
 	}
 	this.setPrice = function(newPrice){
 		this.price = newPrice;
@@ -58,6 +72,8 @@ var myBiz = new LemonadeStand();
 myBiz.generatePeople(20);
 myBiz.logArray(myBiz.passerbys);
 var runSimButton = document.getElementById("runSimulation");
+
+
 
 //runSimButton.onclick = myBiz.getForecast(5),myBiz.logArray();
 
