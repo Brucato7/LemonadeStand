@@ -17,11 +17,13 @@ function LemonadeStand(){
 	this.days = 0;
 	this.generatePeople = function(num, days) {
 		for(var j = 0; j < days; j++){
+			var placeholderArray = [];
 			for(var i = 0; i < num; i++){
 				var object = new Person();
 				var probability = this.calculateProbabilityOfPurchase(object.probabilityOfPurchase, this.forecast[j]);
-				this.pushToArray(probability, this.passerbys);
+				this.pushToArray(probability, placeholderArray);
 			}
+			this.pushToArray(placeholderArray, this.passerbys);
 		}
 	}
 	this.calculateProbabilityOfPurchase = function(prob, forecast){
@@ -29,12 +31,18 @@ function LemonadeStand(){
 		probability = (forecast>75 ? probability*(forecast%75): probability*1);
 		return probability;
 	}
+	this.isLikelyToBuy = function(x){
+		return x > .5;
+	}
 	this.pushToArray = function(object, array){
 		array.push(object);
 	}
 	this.logArray = function(array){
-		for(var i = 0; i < array.length; i++){
-			console.log(i+1 + ": " + array[i]);
+		for(var j = 0; j < array.length; j++){
+			console.log("Day " + (j+1));
+			for(var i = 0; i < array[j].length; i++){
+				console.log((i+1) + ": " + array[j][i]);
+			}
 		}
 	}
 	this.getForecast = function(days){
@@ -92,4 +100,3 @@ var runSimButton = document.getElementById("runSimulation");
 		d. Profit (number of lemonades sold * (price - cost to make))
 
 */
-
