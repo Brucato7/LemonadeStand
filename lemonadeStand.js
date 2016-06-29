@@ -43,11 +43,11 @@ function LemonadeStand(){
 		}
 	}
 	this.calculateProfit = function(array){
-	var netProfitPerItem = this.price - this.cost;
-	for(var i = 0; i < array.length; i++){
-		this.pushToArray(((array[i]*netProfitPerItem).toFixed(2)),this.profitByDay);
+		var netProfitPerItem = this.price - this.cost;
+		for(var i = 0; i < array.length; i++){
+			this.pushToArray(((array[i]*netProfitPerItem).toFixed(2)),this.profitByDay);
+		}
 	}
-}
 	this.pushToArray = function(object, array){
 		array.push(object);
 	}
@@ -81,6 +81,27 @@ function LemonadeStand(){
 	}
 	this.setDays = function(newDays){
 		this.days = newDays;
+	}
+	this.generateSimulationResultsTable = function() {
+		var tableHTML = "<table><tr><th>Day</th>" +
+							"<th>Temperature</th>" +
+							"<th>Passerbys</th>" +
+							"<th>Lemonades Sold</th>" +
+							"<th>Profit</th>";
+		for(var i = 0; i < this.days; i++){
+			tableHTML += "<tr><td>" + (i+1) + "</td>" +
+							"<td>" + this.forecast[i] + "</td>" +
+							"<td>" + this.passerbysPerDay + "</td>" +
+							"<td>" + this.purchasesByDay[i] + "</td>" +
+							"<td>" + this.profitByDay[i] + "</td></tr>";
+		}
+		tableHTML += "<tr><td>Total</td>" +
+						"<td> - </td>" +
+						"<td>" + (this.days * this.passerbysPerDay) + "</td>" +
+						"<td>" + (this.purchasesByDay.reduce(function(total, next) { return total + next;},0)) + "</td>" +
+						"<td>" + (this.profitByDay.reduce(function(total, next) { return total + Number(next);},0)).toFixed(2) + "</td></tr></table>";
+		document.getElementById("lemonadeForm").style = "display: none";
+		document.getElementById("simulationResults").innerHTML = tableHTML;
 	}
 }
 
