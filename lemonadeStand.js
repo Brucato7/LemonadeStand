@@ -51,7 +51,7 @@ function LemonadeStand(){
 	this.pushToArray = function(object, array){
 		array.push(object);
 	}
-	this.logArray = function(array){
+	this.logPasserbysByDayArray = function(array){
 		for(var j = 0; j < array.length; j++){
 			console.log("Day " + (j+1));
 			for(var i = 0; i < array[j].length; i++){
@@ -83,7 +83,7 @@ function LemonadeStand(){
 		this.days = newDays;
 	}
 	this.generateSimulationResultsTable = function() {
-		var tableHTML = "<table><tr><th>Day</th>" +
+		var tableHTML = "<table style='text-align:center'><tr><th>Day</th>" +
 							"<th>Temperature</th>" +
 							"<th>Passerbys</th>" +
 							"<th>Lemonades Sold</th>" +
@@ -93,13 +93,13 @@ function LemonadeStand(){
 							"<td>" + this.forecast[i] + "</td>" +
 							"<td>" + this.passerbysPerDay + "</td>" +
 							"<td>" + this.purchasesByDay[i] + "</td>" +
-							"<td>" + this.profitByDay[i] + "</td></tr>";
+							"<td>$" + this.profitByDay[i] + "</td></tr>";
 		}
 		tableHTML += "<tr><td>Total</td>" +
 						"<td> - </td>" +
 						"<td>" + (this.days * this.passerbysPerDay) + "</td>" +
 						"<td>" + (this.purchasesByDay.reduce(function(total, next) { return total + next;},0)) + "</td>" +
-						"<td>" + (this.profitByDay.reduce(function(total, next) { return total + Number(next);},0)).toFixed(2) + "</td></tr></table>";
+						"<td>$" + (this.profitByDay.reduce(function(total, next) { return total + Number(next);},0)).toFixed(2) + "</td></tr></table>";
 		document.getElementById("lemonadeForm").style = "display: none";
 		document.getElementById("simulationResults").innerHTML = tableHTML;
 	}
