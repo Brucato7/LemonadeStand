@@ -19,7 +19,7 @@
           <input type="number"  min="0" max="10" step=".1" name="cost" id="cost" value=".3"><br>
           What is the price per lemonade: 
           <input type="number" min="1" max="20" step=".25" name="price" id="price" value="1"><br>
-          <button type="button" name="runSimulation" id="runSimulation" onclick="myBiz.getValuesFromInput(); myBiz.getForecast(myBiz.days); myBiz.generatePeople(myBiz.passerbysPerDay,myBiz.days); myBiz.createPurchasesByDayArray(myBiz.passerbysByDay);">Run Simulation</button>
+          <button type="button" name="runSimulation" id="runSimulation" onclick="myBiz.getValuesFromInput(); myBiz.getForecast(myBiz.days); myBiz.generatePeople(myBiz.passerbysPerDay,myBiz.days); myBiz.createPurchasesByDayArray(myBiz.passerbysByDay);myBiz.calculateProfit(myBiz.purchasesByDay);">Run Simulation</button>
         </formfield>
     </form>
   </div>

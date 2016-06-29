@@ -42,6 +42,12 @@ function LemonadeStand(){
 		this.pushToArray(soldThatDay,this.purchasesByDay);
 		}
 	}
+	this.calculateProfit = function(array){
+	var netProfitPerItem = this.price - this.cost;
+	for(var i = 0; i < array.length; i++){
+		this.pushToArray(((array[i]*netProfitPerItem).toFixed(2)),this.profitByDay);
+	}
+}
 	this.pushToArray = function(object, array){
 		array.push(object);
 	}
